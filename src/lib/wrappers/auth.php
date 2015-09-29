@@ -11,9 +11,9 @@
 *	Includer DB Wrapper and Configs
 *
 */
-include_once 'db.php';
-include_once 'logger.php';
-include_once '../config.php';
+include_once dirname(__FILE__).'/db.php';
+include_once dirname(__FILE__).'/logger.php';
+include_once dirname(__FILE__).'/../config.php';
 
 class Authentication {
 	

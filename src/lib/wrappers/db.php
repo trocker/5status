@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
 *	Initiates new DB Connection Object

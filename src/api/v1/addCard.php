@@ -18,10 +18,10 @@
 *	Include dbwrapper, authentication_wrapper, logger
 */
 
-include_once '../../lib/logger.php';
-include_once '../../lib/auth.php';
-include_once '../../lib/config.php';
-include_once '../../lib/inputvalidation.php'; //This library takes input and puts it in a $input variable
+include_once dirname(__FILE__).'/../../lib/wrappers/logger.php';
+include_once dirname(__FILE__).'/../../lib/wrappers/auth.php';
+include_once dirname(__FILE__).'/../../lib/config.php';
+include_once dirname(__FILE__).'/../../lib/wrappers/inputvalidation.php'; //This library takes input and puts it in a $input variable
 
 
 /**
