@@ -41,9 +41,7 @@ if($authObject->isAuthenticated()){
 	 */
 	$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
 	$query = "INSERT INTO cards (card_title, owner_id, creation_date, modified_date, card_status) VALUES ('".$input['card_title']."', '".$input['user_id']."', '".time()."', '".time()."', 'TO-DO')";
-	echo "\n".$query."\n";
 	$result = $dbconn->execute($query);
-	echo "\n".$result."\n";
 	$dbconn->close();
 
 	$user_id = $input['user_id'];
