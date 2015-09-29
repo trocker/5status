@@ -39,7 +39,7 @@ class DBConn{
 	}
 
 	function close(){
-		mysqli_close($this->$dbconn);
+		mysqli_close($this->dbconn);
 		$this->dbconn=NULL;
 	}
 }
