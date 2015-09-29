@@ -40,7 +40,7 @@ class Authentication {
 	}
 
 	function isAuthenticated(){
-		$query = "SELECT * FROM accounts WHERE user_id = '".$this->user."' AND auth_key = '".$this->$auth_key."'";
+		$query = "SELECT * FROM accounts WHERE user_id = '".$this->user."' AND auth_key = '".$this->auth_key."'";
 		$result = $this->dbconn->execute($query);
 		if($result->num_rows > 0){
 			return true;
