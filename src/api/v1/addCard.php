@@ -41,11 +41,13 @@ if($authObject->isAuthenticated()){
 	 */
 	$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
 	$query = "INSERT INTO cards ('card_title', 'owner_id', 'creation_date', 'modified_date', 'card_status') VALUES ('".$input['card_title']."', '".$input['user_id']."', '".time()."', '".time()."', 'TO-DO')";
+	echo "\n".$query."\n";
 	$result = $dbconn->execute($query);
+	echo "\n".$result."\n";
 	$dbconn->close();
 
 	$response['status'] = 'success';
-	$response['message'] = 'Card added successfully for $user_id';	
+	$response['message'] = "Card added successfully for $user_id";	
 } else{
 	$response['status'] = 'failure';
 	$response['message'] = 'User could not be authenticated';
