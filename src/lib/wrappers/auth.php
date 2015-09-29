@@ -17,16 +17,17 @@ include_once '../config.php';
 
 class Authentication {
 	
-	$user=NULL;
-	$auth_key=NULL;
-	$dbconn=NULL;
-	$logger = new Logger();
+	public $user=NULL;
+	public $auth_key=NULL;
+	public $dbconn=NULL;
+	public $logger=NULL;
 
 
 
 	function __construct($user_init, $auth_key_init, $dbhost_init,
 	$dbuser_init, $dbpassword_init, $dbname_init){ 
 		$this->$user = $user_init;
+		$this->$logger = new Logger();
 		$this->$auth_key = $auth_key_init;
 
 

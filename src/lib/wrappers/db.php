@@ -9,11 +9,11 @@
 
 class DBConn{
 
-	$dbconn = NULL;
-	$dbhost = NULL;
-	$dbuser = NULL;
-	$dbpassword = NULL;
-	$dbname = NULL;
+	public $dbconn = NULL;
+	public $dbhost = NULL;
+	public $dbuser = NULL;
+	public $dbpassword = NULL;
+	public $dbname = NULL;
 
 	function __construct($dbhost_init, $dbuser_init, $dbpassword_init, $dbname_init){
 		$this->$dbuser = $dbuser_init;
