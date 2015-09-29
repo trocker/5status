@@ -46,6 +46,7 @@ if($authObject->isAuthenticated()){
 	echo "\n".$result."\n";
 	$dbconn->close();
 
+	$user_id = $input['user_id'];
 	$response['status'] = 'success';
 	$response['message'] = "Card added successfully for $user_id";	
 } else{
