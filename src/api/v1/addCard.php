@@ -40,7 +40,7 @@ if($authObject->isAuthenticated()){
 	 * 	Continue assuming user is Authenticated 
 	 */
 	$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
-	$query = "INSERT INTO cards ('card_title', 'owner_id', 'creation_date', 'modified_date', 'card_status') VALUES ('".$input['card_title']."', '".$input['user_id']."', '".time()."', '".time()."', 'TO-DO')";
+	$query = "INSERT INTO cards (card_title, owner_id, creation_date, modified_date, card_status) VALUES ('".$input['card_title']."', '".$input['user_id']."', '".time()."', '".time()."', 'TO-DO')";
 	echo "\n".$query."\n";
 	$result = $dbconn->execute($query);
 	echo "\n".$result."\n";
