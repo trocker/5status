@@ -11,3 +11,4 @@ $dbuser = "root";
 $dbpassword = "toor";
 $dbname = "5status";
 $mandrill_key = "QMtdRBE-xHE4dIVTKhy_Tw";
+$salt = "$(*(&^1";

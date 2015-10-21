@@ -1,72 +1,37 @@
 <?php
-require_once('/../../lib/wrappers/functions.php');
-require_once('/../../lib/wrappers/session.php');
-require_once('/../../lib/wrappers/db.php');
-require_once('/../../lib/wrappers/user.php');
 
-if($session->is_logged_in()) {
-  redirect_to("/../../lib/index.html");
+/* 
+*	Login Service - This will take JSON in the form of
+*	{
+*		'user_id':xxxx,
+*		'password':xxxxxxx
+*	}
+*
+*   It returns auth_key
+*/
+
+include_once dirname(__FILE__).'/../../lib/wrappers/logger.php';
+include_once dirname(__FILE__).'/../../lib/wrappers/db.php';
+include_once dirname(__FILE__).'/../../lib/config.php';
+include_once dirname(__FILE__).'/../../lib/wrappers/inputvalidation.php'; //This library takes input and puts it in a $input variable
+
+$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
+//Check if the password with salt is there in the database
+$hashed_password = hash("sha256", $input['password'].$salt);
+
+//If exists, allocate new auth_key and return the auth_key
+$query = "SELECT * FROM accounts WHERE user_id = '".$input['user']."' AND password_hash = '".$hashed_password."'";
+$result = $dbconn->execute($query);
+if($result->num_rows > 0){
+    $random = rand(1,9); for($i=0; $i<14; $i++) {$random .= rand(0,9);}
+	$response['status'] = "success";
+	$response['auth_key'] = $random;
+	$query_update_auth_key = "UPDATE accounts SET auth_key = '".$random."' WHERE user_id = '".$input['user']."'";
+	$result_update_auth_key = $dbconn->execute($query_update_auth_key);
+	$dbconn->close();
+} else {
+	$response['status'] = "failure";
+	$response['message'] = "Wrong credentials. Try again.";
 }
 
-if (isset($_POST['submit'])) { // Form has been submitted.
-
-  $username = trim($_POST['username']);
-  $password = trim($_POST['password']);
-  
-  // Check database to see if username/password exist.
-	$found_user = User::authenticate($username, $password);
-	
-  if ($found_user) {
-    $session->login($found_user);
-    redirect_to("/../../lib/index.html");
-  } else {
-    // username/password combo was not found in the database
-    $message = "Username/password combination incorrect.";
-  }
-  
-} else { // Form has not been submitted.
-  $username = "";
-  $password = "";
-}
-
-?>
-
-<html>
-  <head>
-    <title>5status</title>
-  </head>
-  <body>
-    <div id="header">
-      <h1>User Login</h1>
-    </div>
-    <div id="main">
-
-
-		<h2>Login</h2>
-		<?php echo output_message($message); ?>
-
-		<form action="login.php" method="post">
-		  <table>
-		    <tr>
-		      <td>Username:</td>
-		      <td>
-		        <input type="text" name="username" maxlength="30" value="<?php echo htmlentities($username); ?>" />
-		      </td>
-		    </tr>
-		    <tr>
-		      <td>Password:</td>
-		      <td>
-		        <input type="password" name="password" maxlength="30" value="<?php echo htmlentities($password); ?>" />
-		      </td>
-		    </tr>
-		    <tr>
-		      <td colspan="2">
-		        <input type="submit" name="submit" value="Login" />
-		      </td>
-		    </tr>
-		  </table>
-		</form>
-    </div>
-    <div id="footer">Copyright <?php echo date("Y", time()); ?></div>
-  </body>
-</html>
+echo json_encode($response);
