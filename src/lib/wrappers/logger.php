@@ -11,7 +11,7 @@
 
 class Logger {
 
-	function __contructor(){
+	function __contruct(){
 
 	}
 
