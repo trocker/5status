@@ -39,8 +39,9 @@ if($result->num_rows > 0){
 	//Inset query now
 	$query_insert = "INSERT INTO accounts (user_id, email_id, password_hash, auth_key, creation_date, modified_date, account_status, name, picture) VALUES (".$incremented_user_id.", '".$input['email_id']."', '".$hashed_password."', 'DEFAULT_AUTH', '".time()."', '".time()."', "JOINED", '".$input['name']."',  '".$input['picture']."')";
 	$result_insert = $dbconn->execute($query_insert);
+
 	/* 
-	* TODO: Change the status of the card_sharers table by the joined_comments
+	* TODO: Change the status of the card_sharers table by the joined_comments. Also, edit and change the default user_id field which is NULL before the registraton.
 	*/
 
 	//Form successful response
