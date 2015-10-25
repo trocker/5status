@@ -34,4 +34,7 @@ if($result->num_rows > 0){
 	$response['message'] = "Wrong credentials. Try again.";
 }
 
+$dbconn->close();
 echo json_encode($response);
+
+

@@ -1,13 +1,13 @@
 <?php
 
 /**
-* Accepts a card title from the user and places it in the databases [PHPDocs specific comments]
+* Get comments for a card
 *
 * The file takes a JSON of the following format:
 *	{
 *		'user_id':xxxx,
 *		'auth_key':xxxxxxx,
-*		'card_title':'Call up the plumber'
+*		'card_id':1
 *	}
 *
 */
@@ -35,13 +35,20 @@ if($authObject->isAuthenticated()){
 	 * 	Continue assuming user is Authenticated 
 	 */
 	$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
-	$query = "INSERT INTO cards (card_title, owner_id, creation_date, modified_date, card_status) VALUES ('".$input['card_title']."', '".$input['user_id']."', '".time()."', '".time()."', 'TO-DO')";
+	//Make query to get all comments on a card
+	$query = "SELECT * FROM comments WHERE card_id = '".$input['card_id']."'";
 	$result = $dbconn->execute($query);
+	if($result->num_rows > 0){
+		while($row = $result->fetch_assoc()) {
+			//Push it to the comments output
+			$response['comments'][] = array("id" => $row['id'], "comment" => $row['comment'], "creation_date" => $row['creation_date']);
+		}
+	}
+
 	$dbconn->close();
 
 	$user_id = $input['user_id'];
 	$response['status'] = 'success';
-	$response['message'] = "Card added successfully for $user_id";	
 } else{
 	$response['status'] = 'failure';
 	$response['message'] = 'User could not be authenticated';

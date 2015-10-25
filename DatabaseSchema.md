@@ -39,7 +39,7 @@ Database Schema:
 
 	Table - card_sharers:
 
-		id (unique), card_id, user_id, priority, creation_date
+		id (unique), card_id, user_id, priority, creation_date, joined_comments
 
 			notes:
 				- every user sharing a card will have an entry in card_sharers
