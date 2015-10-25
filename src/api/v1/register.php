@@ -5,7 +5,9 @@
 *
 *	{
 *		'email_id':xxxx,
-*		'password':xxxxxxx
+*		'password':xxxxxxx,
+*		<optional> 'picture':'http://xxxx.xxx/xxxx.jpg',
+*		'name':'First Last'
 *	}
 *
 */
@@ -32,8 +34,10 @@ if($result->num_rows > 0){
 	$result_insert = $dbconn->execute($query_insert);
 	$row = $result->fetch_row();
 	$incremented_user_id = intval($row['max_user_id'])+1;
+	//Check if picture is set or not
+	if(!isset($input['picture'])){ $input['picture'] = $default_image; }
 	//Inset query now
-	$query_insert = "INSERT INTO accounts (user_id, email_id, password_hash, auth_key, creation_date, modified_date, account_status) VALUES (".$incremented_user_id.", '".$input['email_id']."', '".$hashed_password."', 'DEFAULT_AUTH', '".time()."', '".time()."', "JOINED")";
+	$query_insert = "INSERT INTO accounts (user_id, email_id, password_hash, auth_key, creation_date, modified_date, account_status, name, picture) VALUES (".$incremented_user_id.", '".$input['email_id']."', '".$hashed_password."', 'DEFAULT_AUTH', '".time()."', '".time()."', "JOINED", '".$input['name']."',  '".$input['picture']."')";
 	$result_insert = $dbconn->execute($query_insert);
 	/* 
 	* TODO: Change the status of the card_sharers table by the joined_comments
