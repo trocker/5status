@@ -3,7 +3,7 @@
 /* 
 *	Login Service - This will take JSON in the form of
 *	{
-*		'user_id':xxxx,
+*		'email_id':xxxx,
 *		'password':xxxxxxx
 *	}
 *
@@ -20,13 +20,13 @@ $dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
 $hashed_password = hash("sha256", $input['password'].$salt);
 
 //If exists, allocate new auth_key and return the auth_key
-$query = "SELECT * FROM accounts WHERE user_id = '".$input['user']."' AND password_hash = '".$hashed_password."'";
+$query = "SELECT * FROM accounts WHERE email_id = '".$input['email_id']."' AND password_hash = '".$hashed_password."'";
 $result = $dbconn->execute($query);
 if($result->num_rows > 0){
     $random = rand(1,9); for($i=0; $i<14; $i++) {$random .= rand(0,9);}
 	$response['status'] = "success";
 	$response['auth_key'] = $random;
-	$query_update_auth_key = "UPDATE accounts SET auth_key = '".$random."' WHERE user_id = '".$input['user']."'";
+	$query_update_auth_key = "UPDATE accounts SET auth_key = '".$random."' WHERE email_id = '".$input['email_id']."'";
 	$result_update_auth_key = $dbconn->execute($query_update_auth_key);
 	$dbconn->close();
 } else {
