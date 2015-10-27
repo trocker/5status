@@ -37,7 +37,7 @@ if($result->num_rows > 0){
 	//Check if picture is set or not
 	if(!isset($input['picture'])){ $input['picture'] = $default_image; }
 	//Inset query now
-	$query_insert = "INSERT INTO accounts (user_id, email_id, password_hash, auth_key, creation_date, modified_date, account_status, name, picture) VALUES (".$incremented_user_id.", '".$input['email_id']."', '".$hashed_password."', 'DEFAULT_AUTH', '".time()."', '".time()."', "JOINED", '".$input['name']."',  '".$input['picture']."')";
+	$query_insert = "INSERT INTO accounts (user_id, email_id, password_hash, auth_key, creation_date, modified_date, account_status, name, picture) VALUES (".$incremented_user_id.", '".$input['email_id']."', '".$hashed_password."', 'DEFAULT_AUTH', '".time()."', '".time()."', 'JOINED', '".$input['name']."',  '".$input['picture']."')";
 	$result_insert = $dbconn->execute($query_insert);
 
 	/* 
