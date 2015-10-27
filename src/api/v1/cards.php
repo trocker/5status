@@ -30,7 +30,7 @@ if($authObject->isAuthenticated()){
 	 * 	Continue assuming user is Authenticated 
 	 */
 	$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
-	$query = "SELECT * FROM cards WHERE user_id='".$input['user_id']."' ORDER BY creation_date DESC";
+	$query = "SELECT * FROM cards WHERE owner_id='".$input['user_id']."' ORDER BY creation_date DESC";
 	$result = $dbconn->execute($query);
 	if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
