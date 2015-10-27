@@ -23,9 +23,11 @@ $hashed_password = hash("sha256", $input['password'].$salt);
 $query = "SELECT * FROM accounts WHERE email_id = '".$input['email_id']."' AND password_hash = '".$hashed_password."'";
 $result = $dbconn->execute($query);
 if($result->num_rows > 0){
+	$row = $result->fetch_assoc();
     $random = rand(1,9); for($i=0; $i<14; $i++) {$random .= rand(0,9);}
 	$response['status'] = "success";
 	$response['auth_key'] = $random;
+	$response['user_id'] = $row['user_id'];
 	$query_update_auth_key = "UPDATE accounts SET auth_key = '".$random."' WHERE email_id = '".$input['email_id']."'";
 	$result_update_auth_key = $dbconn->execute($query_update_auth_key);
 	$dbconn->close();
