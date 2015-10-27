@@ -32,7 +32,7 @@ if($result->num_rows > 0){
 } else {
 	$query_insert = "SELECT MAX(user_id) as max_user_id FROM accounts";
 	$result_insert = $dbconn->execute($query_insert);
-	$row = $result->fetch_row();
+	$row = $result_insert->fetch_row();
 	$incremented_user_id = intval($row['max_user_id'])+1;
 	//Check if picture is set or not
 	if(!isset($input['picture'])){ $input['picture'] = $default_image; }
