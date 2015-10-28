@@ -8,17 +8,18 @@ web.login = "index.php";
 var client_user_id, client_auth_key;
 
 //Mode
-//var mode = "_dev";
+var mode = ".com";
+//var mode = "_dev.com:8080/src";
 //var mode = "";
 
 
 //API Definitions
 
 var api = {};
-api.login = "http://5status"+mode+".com:8080/src/api/v1/login.php";
-api.register = "http://5status"+mode+".com:8080/src/api/v1/register.php";
-api.get_cards = "http://5status"+mode+".com:8080/src/api/v1/cards.php";
-api.add_cards = "http://5status"+mode+".com:8080/src/api/v1/addCard.php";
+api.login = "http://5status"+mode+"/api/v1/login.php";
+api.register = "http://5status"+mode+"/api/v1/register.php";
+api.get_cards = "http://5status"+mode+"/api/v1/cards.php";
+api.add_cards = "http://5status"+mode+"/api/v1/addCard.php";
 
 
 function login(){
