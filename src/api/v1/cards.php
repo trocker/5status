@@ -37,7 +37,6 @@ if($authObject->isAuthenticated()){
 			$response['cards'][] = array("card_title" => $row['card_title'], "card_id" => $row['id'], "created_on" => $row['creation_date'], "owner_id" => $row['owner_id'], "status" => $row['card_status']);
 		}
 	}
-	$dbconn->close();
 
 	$user_id = $input['user_id'];
 	$response['status'] = 'success';
@@ -46,4 +45,5 @@ if($authObject->isAuthenticated()){
 	$response['message'] = 'User could not be authenticated';
 }
 
+$dbconn->close();
 echo json_encode($response);
