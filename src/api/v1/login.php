@@ -15,7 +15,11 @@ include_once dirname(__FILE__).'/../../lib/wrappers/db.php';
 include_once dirname(__FILE__).'/../../lib/config.php';
 include_once dirname(__FILE__).'/../../lib/wrappers/inputvalidation.php'; //This library takes input and puts it in a $input variable
 
-$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
+try { 
+	$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
+} catch (Exception $e){
+	echo $e->getMessage();
+}
 //Check if the password with salt is there in the database
 $hashed_password = hash("sha256", $input['password'].$salt);
 

@@ -18,7 +18,7 @@
    <body>
       <div class="container">
       <div class="logo">
-         <a href="index.html">
+         <a href="index.php">
             <img src="images/logo.png" alt="logo" width="61">
             <div class="logo-txt"><span>5</span> Status</div>
          </a>
@@ -27,7 +27,7 @@
       <br>
       <div class="logo-txt" style="margin-top: 10px; margin-bottom: 10px;">All your tasks in one place.</div>
       <div style="margin-bottom: 60px;" class="logo-txt">Share. Comment. Update Status.</div>
-      <form method="post" action="photoupload.asp" name="submit" enctype="multipart/form-data" align="center" style="text-align: center; width: 300px; margin: auto;">
+      <form method="post" action="photoupload.asp" name="submit" enctype="multipart/form-data" align="center" style="text-align: center; width: 300px; margin: auto;" onsubmit="login()">
   
          <div class="row" style="text-align:center">   
             <input type="email" class="form-control" name="email" id="email" placeholder="Email - sample@example.com" required>
@@ -49,7 +49,8 @@
       
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
       <script src="js/jquery-1.11.2.min.js"></script>
-      <script src="js/custom.js"></script>  
+      <script src="js/jquery.cookie.js"></script>
+      <script src="js/custom.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed --> 
       <script src="js/bootstrap.min.js"></script>
    </body>

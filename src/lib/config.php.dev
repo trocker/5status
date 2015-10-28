@@ -6,7 +6,7 @@
 *
 */
 
-$dbhost = "127.0.0.1";
+$dbhost = "192.168.1.179";
 $dbuser = "root";
 $dbpassword = "toor";
 $dbname = "5status";
