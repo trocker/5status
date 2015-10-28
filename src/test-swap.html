@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body, html {
+
+font-family:sans-serif;
+color:#330033;
+text-align:center;
+}
+[draggable] {
+user-select: none;
+}
+ul {
+margin:auto;
+width:20%;
+text-align:center;
+}
+li {
+list-style-type:none;
+padding:5px;
+margin:2px;
+background-color:#CCCCFF;
+border:2px double #CCCCCC;
+}
+
+</style>
+<script type="text/javascript">
+var source;
+function dragStarted(evt){
+//start drag
+source=evt.target;
+//set data
+evt.dataTransfer.setData("text/plain", evt.target.innerHTML);
+//specify allowed transfer
+evt.dataTransfer.effectAllowed = "move";
+}
+function draggingOver(evt){
+//drag over
+evt.preventDefault();
+//specify operation
+evt.dataTransfer.dropEffect = "move";
+}
+function dropped(evt){
+//drop
+evt.preventDefault();
+evt.stopPropagation();
+//update text in dragged item
+source.innerHTML = evt.target.innerHTML;
+//update text in drop target
+evt.target.innerHTML = evt.dataTransfer.getData("text/plain");
+}
+</script>
+
+</head>
+<body>
+<div class="container">
+         <div class="logo">
+            <img src="images/logo.png" alt="logo" width="61">
+            <div class="logo-txt"><span>5</span> Status</div>
+         </div>
+<ul>
+<li draggable="true" ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)">A</li>
+<li draggable="true" ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)">B</li>
+<li draggable="true" ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)">C</li>
+<li draggable="true" ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)">D</li>
+<li draggable="true" ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)">E</li>
+</ul>
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+      <script src="js/jquery-1.11.2.min.js"></script> 
+      <!-- Include all compiled plugins (below), or include individual files as needed --> 
+      <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

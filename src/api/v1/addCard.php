@@ -25,11 +25,6 @@ include_once dirname(__FILE__).'/../../lib/wrappers/inputvalidation.php'; //This
 
 
 /**
-*  TODO - Sanitize the input
-*/
-
-
-/**
 *	Do the DB query
 */
 

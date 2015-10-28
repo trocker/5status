@@ -24,8 +24,7 @@ class Authentication {
 
 
 
-	function __construct($user_init, $auth_key_init, $dbhost_init,
-	$dbuser_init, $dbpassword_init, $dbname_init){ 
+	function __construct($user_init, $auth_key_init, $dbhost_init,	$dbuser_init, $dbpassword_init, $dbname_init){ 
 		$this->user = $user_init;
 		$this->logger = new Logger();
 		$this->auth_key = $auth_key_init;

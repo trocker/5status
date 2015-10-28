@@ -47,6 +47,10 @@ margin-top: 0px;}
 .tot-comment{text-align:center;padding:15px;background:#F9F9F9;}
 .tot-comment a{color:#5ad8be;}
 .add-job{background:#47D3BC;text-align:center;margin:0 auto;color:#fff;border-radius:50px;padding:15px 35px;font-size:18px;}
+.login-button{background:#47D3BC;text-align:center;margin:0 auto;color:#fff;border-radius:50px;padding:15px 25px;font-size:18px;}
+.loginbutton-job:hover,.add-job:focus{background:#2EC2A9;color:#fff;}
+.loginbutton-job img{margin-right:10px;}
+.loginbutton-block{float:left;width:100%;padding:35px 0;}
 .add-job:hover,.add-job:focus{background:#2EC2A9;color:#fff;}
 .add-job img{margin-right:10px;}
 .addbtn-block{float:left;width:100%;padding:35px 0;}

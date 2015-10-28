@@ -1,0 +1,12 @@
+REGISTER
+---------
+curl -v -H "Content-Type: application/json" -X POST -d '{"email_id":"someone@example.com", "password":"password", "name":"Goatee Person", "picture":"http://i.imgur.com/43ESX4c.png"}' http://52.89.55.177/5status/src/api/v1/register.php
+
+
+LOGIN
+------
+curl -v -H "Content-Type: application/json" -X POST -d '{"email_id":"someone@example.com", "password":"password"}' http://52.89.55.177/5status/src/api/v1/login.php
+
+GET CARDS
+----------
+curl -v -H "Content-Type: application/json" -X POST -d '{"user_id":17700, "auth_key":"comeonwork"}' http://52.89.55.177/5status/src/api/v1/cards.php
