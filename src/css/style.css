@@ -14,7 +14,7 @@ a:hover,a:focus{text-decoration:none;outline:none;}
 .main{margin: 40px 0px 0px;float: left;width: 100%;background: #fff;box-shadow: 0 0 2px 1px #ccc;border-bottom-right-radius:5px;border-bottom-left-radius:5px;}
 .count{background:#3FD8BF;padding:3px;border-radius:4px;width:27px;height:27px;padding-top:4px;text-align:center;color:#fff;}
 .title-block{padding:5px;}
-.title-block .title-heading{color:#767676;line-height: 24px;}
+.title-block .title-heading{color:#767676;line-height: 24px;height: 48px;}
 .counter{vertical-align:middle;padding-right:6px;}
 .green-c{background:#44D07C;}
 .orange-c{background:#e3ad57;}
