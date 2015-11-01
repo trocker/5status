@@ -34,7 +34,6 @@ if($result->num_rows > 0){
 	$response['user_id'] = $row['user_id'];
 	$query_update_auth_key = "UPDATE accounts SET auth_key = '".$random."' WHERE email_id = '".$input['email_id']."'";
 	$result_update_auth_key = $dbconn->execute($query_update_auth_key);
-	$dbconn->close();
 } else {
 	$response['status'] = "failure";
 	$response['message'] = "Wrong credentials. Try again.";
