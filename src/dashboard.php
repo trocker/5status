@@ -27,11 +27,11 @@
       </div>
       <div class="modal-body">
           <div class="row" style="text-align:center">   
-            <a href="index-green.html" class="btn btn-sub green-c" onclick="changeStatus('db')">Doing By</a>
-            <a href="index-orange.html" class="btn btn-sub orange-c" onclick="changeStatus('qo')">Queued On</a>
-            <a href="index-red.html" class="btn btn-sub red-c" onclick="changeStatus('sb')">Stopped By</a>
-            <a href="index-blue.html" class="btn btn-sub blue-c" onclick="changeStatus('dob')">Done By</a>
-            <a href="index-yellow.html" class="btn btn-sub yellow-c" onclick="changeStatus('wo')">Waiting On</a>
+            <a class="btn btn-sub green-c" onclick="changeStatus('db')">Doing By</a>
+            <a class="btn btn-sub orange-c" onclick="changeStatus('qo')">Queued On</a>
+            <a class="btn btn-sub red-c" onclick="changeStatus('sb')">Stopped By</a>
+            <a class="btn btn-sub blue-c" onclick="changeStatus('dob')">Done By</a>
+            <a class="btn btn-sub yellow-c" onclick="changeStatus('wo')">Waiting On</a>
           </div><br>
       </div>
       <div class="modal-footer">
