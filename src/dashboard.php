@@ -18,7 +18,28 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="modal fade">
+<div class="modal fade" id="change_job_status_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" align="center" style="color:#888;">Change Task Status</h4>
+      </div>
+      <div class="modal-body">
+          <div class="row" style="text-align:center">   
+            <a class="btn btn-sub green-c" onclick="changeStatus('db')">Doing By</a>
+            <a class="btn btn-sub orange-c" onclick="changeStatus('qo')">Queued On</a>
+            <a class="btn btn-sub red-c" onclick="changeStatus('sb')">Stopped By</a>
+            <a class="btn btn-sub blue-c" onclick="changeStatus('dob')">Done By</a>
+            <a class="btn btn-sub yellow-c" onclick="changeStatus('wo')">Waiting On</a>
+          </div><br>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="add_task_modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

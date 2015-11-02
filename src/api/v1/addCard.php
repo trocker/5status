@@ -37,6 +37,10 @@ if($authObject->isAuthenticated()){
 	$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
 	$query = "INSERT INTO cards (card_title, owner_id, creation_date, modified_date, card_status) VALUES ('".$input['card_title']."', '".$input['user_id']."', '".time()."', '".time()."', 'TO-DO')";
 	$result = $dbconn->execute($query);
+
+	//TODO: Add the first comment, saying user added the card.
+	
+	//TODO: Add the user in card_sharers 
 	$dbconn->close();
 
 	$user_id = $input['user_id'];
