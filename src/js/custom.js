@@ -8,8 +8,8 @@ web.login = "index.php";
 var client_user_id, client_auth_key, job_in_focus;
 
 //Mode
-var mode = "_dev.com:8080/src";
-//var mode = ".com";
+//var mode = "_dev.com:8080/src";
+var mode = ".com";
 
 
 //API Definitions
