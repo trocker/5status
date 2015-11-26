@@ -35,10 +35,12 @@ if($authObject->isAuthenticated()){
 	if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
 			//get the latest comment
-			$result_comment = $dbconn->execute("SELECT * FROM comments INNER JOIN accounts WHERE card_id='".$row['id']."'  AND accounts.user_id = comments.user_id ORDER BY comments.creation_date DESC");
-			$result_comment_latest = $result_comment->fetch_assoc();
+			$result_comment = $dbconn->execute("SELECT * FROM comments INNER JOIN accounts WHERE card_id='".$row['id']."'  AND accounts.user_id = comments.user_id ORDER BY comments.creation_date DESC");				
+			
 			if(! $result_comment->num_rows){
 				$result_comment_latest = array("created_on" => $row['creation_date'], "comment" => "created the card.", "user_id" => $row['owner_id']);
+			} else {
+				$result_comment_latest = $result_comment->fetch_assoc();
 			}
 			//form a response
 			$response['cards'][] = array("card_title" => $row['card_title'], "card_id" => $row['id'], "created_on" => $row['creation_date'], "owner_id" => $row['owner_id'], "status" => $row['card_status'],"number_of_comments"=>$result_comment->num_rows , "comments" => array(array("created_on" => $result_comment_latest['creation_date'], "comment" => $result_comment_latest['comment'], "user_id" => $result_comment_latest['user_id'],  "user_id" => $result_comment_latest['picture'])));
