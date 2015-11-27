@@ -29,8 +29,6 @@ if($authObject->isAuthenticated()){
 	/**
 	 * 	Continue assuming user is Authenticated 
 	 */
-
-	//TODO: Also show the cards in which the user is a card_sharer but not a creator and take the uniques of all of these selections
 	$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
 	$query = "SELECT DISTINCT(cards.id),cards.*, accounts.name, accounts.picture FROM cards INNER JOIN accounts INNER JOIN card_sharers WHERE (owner_id='".$input['user_id']."' OR card_sharers.user_id='".$input['user_id']."') AND accounts.user_id = cards.owner_id ORDER BY cards.creation_date DESC";
 	//echo $query;
@@ -40,7 +38,7 @@ if($authObject->isAuthenticated()){
 
 			//get all the card sharers for this card
 			//TODO: Get the card sharers who have joined fully - don't have JOINED_COMMENT as not NONE
-			$result_cardsharers = $dbconn->execute("SELECT * FROM card_sharers INNER JOIN accounts WHERE card_id = '".$row['id']."' AND accounts.user_id = card_sharers.user_id");
+			$result_cardsharers = $dbconn->execute("SELECT * FROM card_sharers INNER JOIN accounts WHERE card_id = '".$row['id']."' AND accounts.user_id = card_sharers.user_id AND card_sharers.joined_comments = 'NONE'");
 			$card_sharers = array();
 			while($row_cardsharer = $result_cardsharers->fetch_assoc()){
 				$card_sharers[] = array("user_id" => $row_cardsharer['user_id'], "picture" => $row_cardsharer['picture'], "name" => $row_cardsharer['name']);
@@ -48,9 +46,11 @@ if($authObject->isAuthenticated()){
 
 			//get the latest comment
 			$result_comment = $dbconn->execute("SELECT comments.*, accounts.* FROM comments INNER JOIN accounts WHERE comments.card_id='".$row['id']."'  AND accounts.user_id = comments.user_id ORDER BY comments.creation_date DESC");
-			$result_comment_latest = $result_comment->fetch_assoc();
+			
 			if(! $result_comment->num_rows){
 				$result_comment_latest = array("created_on" => $row['creation_date'], "comment" => "created the card.", "user_id" => $row['owner_id'], "picture" => $row['picture'], "name" => $row['name']);
+			} else {
+				$result_comment_latest = $result_comment->fetch_assoc();
 			}
 			//form a response
 			$response['cards'][] = array("card_title" => $row['card_title'], "card_id" => $row['id'], "created_on" => $row['creation_date'], "owner_id" => $row['owner_id'], "status" => $row['card_status'],"number_of_comments"=>$result_comment->num_rows ,"card_sharers" => $card_sharers , "comments" => array(array("created_on" => $result_comment_latest['creation_date'], "comment" => $result_comment_latest['comment'], "user_id" => $result_comment_latest['user_id'],  "picture" => $result_comment_latest['picture'], "name" => $result_comment_latest['name'])));
