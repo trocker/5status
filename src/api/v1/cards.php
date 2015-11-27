@@ -48,7 +48,7 @@ if($authObject->isAuthenticated()){
 			$result_comment = $dbconn->execute("SELECT comments.*, accounts.* FROM comments INNER JOIN accounts WHERE comments.card_id='".$row['id']."'  AND accounts.user_id = comments.user_id ORDER BY comments.creation_date DESC");
 			
 			if(! $result_comment->num_rows){
-				$result_comment_latest = array("created_on" => $row['creation_date'], "comment" => "created the card.", "user_id" => $row['owner_id'], "picture" => $row['picture'], "name" => $row['name']);
+				$result_comment_latest = array("creation_date" => $row['creation_date'], "comment" => "created the card.", "user_id" => $row['owner_id'], "picture" => $row['picture'], "name" => $row['name']);
 			} else {
 				$result_comment_latest = $result_comment->fetch_assoc();
 			}
