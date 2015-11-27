@@ -14,6 +14,8 @@ $mandrill_key = "QMtdRBE-xHE4dIVTKhy_Tw";
 $salt = "$(*(&^1";
 $default_image = "https://pixabay.com/static/uploads/photo/2012/04/26/19/43/profile-42914_640.png";
 //Place the S3 Upload Key here
+$awsAccessKey = "AKIAI7UEYJ4ZVVYMD5YA";
+$awsSecretKey = "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";
 
 
 //Gearman Config
