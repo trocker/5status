@@ -30,7 +30,7 @@
       <div class="logo-txt" style="margin-top: 10px; margin-bottom: 10px;">All your tasks in one place.</div>
       <div style="margin-bottom: 20px;" class="logo-txt">Share. Comment. Update Status.</div>
       <div style="margin-bottom: 40px;" class="logo-txt"><u>Register</u></div>
-      <form method="post" action="photoupload.asp" name="submit" enctype="multipart/form-data" align="center" style="text-align: center; width: 300px; margin: auto;"  onsubmit="register()">
+      <form method="post" name="submit" align="center" style="text-align: center; width: 300px; margin: auto;"  onsubmit="register()">
   
          <div class="row" style="text-align:center">   
             <input type="email" class="form-control" name="email" id="email" placeholder="Email - sample@example.com" required></div><br> 
@@ -39,7 +39,7 @@
          <div class="row" style="text-align:center">
             <input type="name" class="form-control" name="name" id="name" placeholder="Name" required></div><br> 
          <div class="row" style="text-align:center">
-            <center class="form-control"> Select Picture <input type="file" name="filefield" align="center" style="width:70px; border-radius:5px; float:left;"></center><br>
+            <center class="form-control"> Select Picture <input type="file" name="register_picture" id="register_picture" align="center" style="width:70px; border-radius:5px; float:left;"></center><br>
             <div class="text-center addbtn-block"><a href="#" class="add-job" onclick="register()">Register</a></div></div><br>
 
       </form>

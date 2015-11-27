@@ -127,24 +127,45 @@ function min_title(title){
 	return title;
 }
 
+var register_image = "";
+
 function register(){
 	var register = {};
 	register.email = $('#email').val();
 	register.password = $('#password').val();
 	register.name = $('#name').val();
+
+	//Take upload image and turn it into base_64
 	$.ajax({
 	  type: "POST",
 	  url: api.register,
 	  contentType: "application/json",
-	  data: JSON.stringify({ "email_id": register.email, "password" : register.password, "name" : register.name }),
+	  data: JSON.stringify({ "email_id": register.email, "password" : register.password, "name" : register.name, "picture" : register_image}),
 	  success: register_successful,
 	  dataType: "json"
 	});
 }
 
+
+
+function readImage() {
+    if ( this.files && this.files[0] ) {
+        var FR = new FileReader();
+        FR.onload = function(e) {
+             register_image = e.target.result;
+             console.log(register_image);
+        };
+        FR.readAsDataURL( this.files[0] );
+        
+    }
+}
+
+$("#register_picture").change(readImage);
+
 function register_successful(data){
 	if(data.status == "success"){
 		alert(data.status);
+		alert("You are registered! Go ahead and log in.");
 		window.location.href = web.login;
 	} else {
 		alert(data.message);

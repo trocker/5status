@@ -17,6 +17,7 @@
 include_once dirname(__FILE__).'/../../lib/wrappers/logger.php';
 include_once dirname(__FILE__).'/../../lib/wrappers/db.php';
 include_once dirname(__FILE__).'/../../lib/config.php';
+include_once dirname(__FILE__).'/../../lib/base64_to_jpeg.php';
 include_once dirname(__FILE__).'/../../lib/wrappers/inputvalidation.php'; //This library takes input and puts it in a $input variable
 include_once dirname(__FILE__).'/../../lib/wrappers/queue.php';
 
@@ -43,8 +44,7 @@ if($result->num_rows > 0){
 	if(!isset($input['picture'])){ $input['picture'] = $default_image; }
 	else { 
 		//Send the picture blob to get a link in return
-
-		$input['picture'] = $queue->enqueueSync("register_picture", serialize(array(base64_decode($input['picture'], md5($incremented_user_id)))), 1);
+		$input['picture'] = $queue->enqueueSync("register_picture", serialize(array(base64_to_jpeg($input['picture']), md5($incremented_user_id))), 1);
 	}
 
 	//Inset query now

@@ -19,6 +19,7 @@ $queueworker = new QueueWorker($queue_host, $queue_port, "register_picture");
 
 //TODO: Make workers multithreaded
 function run($job){
+	echo "\nReceived a job... Running it now.\n";
 	$workload = $job->workload();
 
 	//functionality start
@@ -31,7 +32,7 @@ function run($job){
 
 	//upload the file
 	$filestorage = new FileStorage();
-	$thumbnail_upload_url = $filestorage->upload(TEMP_WORKSPACE.$picture_name."_thumbnail", "5status-images", $picture_name.".jpg");
+	$thumbnail_upload_url = $filestorage->upload(TEMP_WORKSPACE.$picture_name."_thumbnail", "5status-images", $picture_name.".jpg", array(), array('Content-Type' => 'image/jpeg'));
 
 
 	//delete all temp files

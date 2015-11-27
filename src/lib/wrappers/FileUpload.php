@@ -21,8 +21,8 @@ class FileStorage {
 	}
 
 
-	function upload($local_file_path, $bucket_name, $upload_name){
-		$this->s3->putObject($this->s3->inputFile($local_file_path, false), $bucket_name, $upload_name, S3::ACL_PUBLIC_READ);
+	function upload($local_file_path, $bucket_name, $upload_name, $metaHeaders = array(), $request_headers = array()){
+		$this->s3->putObject($this->s3->inputFile($local_file_path, false), $bucket_name, $upload_name, S3::ACL_PUBLIC_READ, $metaHeaders, $request_headers);
 		return "https://s3-us-west-2.amazonaws.com/".$bucket_name."/".$upload_name."";
 	}
 
