@@ -44,8 +44,9 @@ class QueueWorker {
 		if($this->gmworker->work()){
 			if ($this->gmworker->returnCode() != GEARMAN_SUCCESS) {
 				//TODO: put logger here
-			    echo "Worker fault!";
+			    return false;
 			  }
+			 return true;
 			 
 		}
 

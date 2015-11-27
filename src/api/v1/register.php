@@ -44,16 +44,13 @@ if($result->num_rows > 0){
 	else { 
 		//Send the picture blob to get a link in return
 
-		$input['picture'] = $queue->enqueue("register_picture", base64_decode($input['picture']), 1);
+		$input['picture'] = $queue->enqueueSync("register_picture", serialize(array(base64_decode($input['picture'], md5($incremented_user_id)))), 1);
 	}
 
 	//Inset query now
 	$query_insert = "INSERT INTO accounts (user_id, email_id, password_hash, auth_key, creation_date, modified_date, account_status, name, picture) VALUES (".$incremented_user_id.", '".$input['email_id']."', '".$hashed_password."', 'DEFAULT_AUTH', '".time()."', '".time()."', 'JOINED', '".$input['name']."',  '".$input['picture']."')";
 	$result_insert = $dbconn->execute($query_insert);
 
-	/* 
-	* TODO: Change the status of the card_sharers table by the joined_comments. Also, edit and change the default user_id field which is NULL before the registraton.
-	*/
 	$result_card_shares = $dbconn->execute("SELECT * FROM card_sharers WHERE joined_comments='NOT_JOINED_".$input['email_id']."'");
 	while($row = $result_card_shares->fetch_assoc()){
 		//update
