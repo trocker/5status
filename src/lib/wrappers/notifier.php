@@ -37,7 +37,7 @@ class Notifier {
 	// An email sending wrapper
 	function sendEmail($to, $from, $subject, $body){
 		$message = new stdClass();
-		$message->html = "html".$body;
+		$message->html = $body;
 		$message->text = $body;
 		$message->subject = $subject;
 		$message->from_email = $from;

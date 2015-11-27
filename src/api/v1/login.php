@@ -23,6 +23,8 @@ try {
 //Check if the password with salt is there in the database
 $hashed_password = hash("sha256", $input['password'].$salt);
 
+//TODO: Check if the user is INVITED or already JOINED
+
 //If exists, allocate new auth_key and return the auth_key
 $query = "SELECT * FROM accounts WHERE email_id = '".$input['email_id']."' AND password_hash = '".$hashed_password."'";
 $result = $dbconn->execute($query);

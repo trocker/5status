@@ -5,14 +5,14 @@
 *
 *
 */
-$dbhost = "10.128.9.133 ";
-//$dbhost = "192.168.1.179";
+//$dbhost = "10.128.9.133 ";
+$dbhost = "192.168.1.179";
 $dbuser = "root";
 $dbpassword = "toor";
 $dbname = "5status";
 $mandrill_key = "QMtdRBE-xHE4dIVTKhy_Tw";
 $salt = "$(*(&^1";
-$default_image = "http://societyofillustratorssandiego.org/wp-content/uploads/2015/03/male-placeholder.gif";
+$default_image = "https://pixabay.com/static/uploads/photo/2012/04/26/19/43/profile-42914_640.png";
 //Place the S3 Upload Key here
 
 

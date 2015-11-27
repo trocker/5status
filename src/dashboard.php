@@ -39,6 +39,24 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div class="modal fade" id="invite_user_status_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" align="center" style="color:#888;">Invite to this Card</h4>
+      </div>
+      <div class="modal-body">
+          <div class="row" style="text-align:center">   
+            <input type="text" class="form-control" name="inviteuser" id="inviteuser" style="height:50px;" placeholder="Example - someone@example.com">
+          </div><br>
+      </div>
+      <div class="modal-footer">
+        <div class="text-center addbtn-block"><a href="#" class="add-job" onclick="inviteuser()"><img src="images/big-add-icon.png" height="22" alt="icon">Invite</a></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <div class="modal fade" id="add_task_modal">
   <div class="modal-dialog">
     <div class="modal-content">

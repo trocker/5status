@@ -38,6 +38,10 @@ class DBConn{
 		}
 	}
 
+	function last_id(){
+		return mysqli_insert_id($this->dbconn);
+	}
+
 	function close(){
 		mysqli_close($this->dbconn);
 		$this->dbconn=NULL;

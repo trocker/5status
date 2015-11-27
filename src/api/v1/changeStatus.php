@@ -33,10 +33,11 @@ if($authObject->isAuthenticated()){
 	$query = "UPDATE cards SET card_status = '".$input['card_status']."' WHERE id = ".$input['card_id']."";
 	$result = $dbconn->execute($query);
 
-	//TODO: Add a comment saying who updated the card
+	//Add a comment saying who updated the card -> and type
+	$dbconn->execute("INSERT INTO comments (comment, card_id, user_id, creation_date, type) VALUES ('changed the status to ".strtoupper($input['card_status']).".', ".$input['card_id'].", ".$input['user_id'].", ".time().", 'AUTO')");
 
+	//TODO: Ask the user who is it queued on or waiting on
 
-	//TODO: Add the user in card_sharers 
 	$dbconn->close();
 
 	$user_id = $input['user_id'];

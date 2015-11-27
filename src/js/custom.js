@@ -8,8 +8,8 @@ web.login = "index.php";
 var client_user_id, client_auth_key, job_in_focus;
 
 //Mode
-var mode = "_dev.com:8080/src";
-//var mode = ".com";
+//var mode = "_dev.com:8080/src";
+var mode = ".com";
 
 
 //API Definitions
@@ -21,6 +21,7 @@ api.get_cards = "http://5status"+mode+"/api/v1/cards.php";
 api.add_cards = "http://5status"+mode+"/api/v1/addCard.php";
 api.status = "http://5status"+mode+"/api/v1/changeStatus.php";
 api.comment = "http://5status"+mode+"/api/v1/comment.php";
+api.invite_user = "http://5status"+mode+"/api/v1/invite_to_card.php";
 
 function login(){
 	var login = {};
@@ -106,7 +107,7 @@ function make_card(card){
 	}
 	//Form the html for the cards
 	//**TODO - pad the card title with minimum card title
-	return '<div class="col-sm-4" id="'+card.card_id+'"><div class="main"> <div class="title-block"> <div class="media"> <div class="media-body"> <h4 class="title-heading" title="'+card.card_title+'">'+min_title(card.card_title)+'</h4> </div> <div class="media-left counter"> <a href="#"> <div class="count">1</div> </a> </div> </div> </div> <div onclick="changetaskstatus_modal('+card.card_id+')"> <a class="btn btn-sub '+button_color+'">'+card.status+'</a> </div> <div class="add-block">'+ card_sharer_html +'<a href="#" class="add-user"><span class="au-block"><img src="images/user.jpg"   alt="image" class="img-circle user" height="40" width="40"> <i class="add-user-btn"><img src="images/small-add-icon.png" alt="image"></i></span></a> </div> <div class="clearfix"></div> <div class="tp-comment"> <input type="text" class="form-control" onkeyup="comment_box_event(event, this)" id="'+card.card_id+'" placeholder="Type a comment..."> </div> <div class="commenting"> <div class="media"> <div class="media-left"> <a href="#" class="add-user"><span class="au-block"><img title="'+card.comments[0].name+'" src="'+card.comments[0].picture+'"   alt="image" class="img-circle user" height="40" width="40"></span></a> </div> <div class="media-body"> <div class="what-delay"> <h5>'+card.comments[0].comment+'</h5> </div> <div class="recent-time"><img src="images/watch.png" alt="watch" width="15"> '+time_ago(card.comments[0].created_on)+' ago</div> </div> </div> </div> <div class="tot-comment"><a href="#">'+card.number_of_comments+' Comments <i class="fa fa-angle-right"></i></a></div> </div> </div> '; 
+	return '<div class="col-sm-4" id="'+card.card_id+'"><div class="main"> <div class="title-block"> <div class="media"> <div class="media-body"> <h4 class="title-heading" title="'+card.card_title+'">'+min_title(card.card_title)+'</h4> </div> <div class="media-left counter"> <a href="#"> <div class="count">1</div> </a> </div> </div> </div> <div onclick="changetaskstatus_modal('+card.card_id+')"> <a class="btn btn-sub '+button_color+'">'+card.status+'</a> </div> <div class="add-block">'+ card_sharer_html +'<a href="#" class="add-user" onclick="inviteuser_modal('+card.card_id+')"><span class="au-block"><img src="images/user.jpg"   alt="image" class="img-circle user" height="40" width="40"> <i class="add-user-btn"><img src="images/small-add-icon.png" alt="image"></i></span></a> </div> <div class="clearfix"></div> <div class="tp-comment"> <input type="text" class="form-control" onkeyup="comment_box_event(event, this)" id="'+card.card_id+'" placeholder="Type a comment..."> </div> <div class="commenting"> <div class="media"> <div class="media-left"> <a href="#" class="add-user"><span class="au-block"><img title="'+card.comments[0].name+'" src="'+card.comments[0].picture+'"   alt="image" class="img-circle user" height="40" width="40"></span></a> </div> <div class="media-body"> <div class="what-delay"> <h5>'+card.comments[0].comment+'</h5> </div> <div class="recent-time"><img src="images/watch.png" alt="watch" width="15"> '+time_ago(card.comments[0].created_on)+' ago</div> </div> </div> </div> <div class="tot-comment"><a href="#">'+card.number_of_comments+' Comments <i class="fa fa-angle-right"></i></a></div> </div> </div> '; 
 }
 
 function time_ago(timestamp){
@@ -144,7 +145,7 @@ function register(){
 function register_successful(data){
 	if(data.status == "success"){
 		alert(data.status);
-		//window.location.href = web.login;
+		window.location.href = web.login;
 	} else {
 		alert(data.message);
 	}
@@ -241,6 +242,36 @@ function comment_submit(comment, card_id){
 }
 
 function comment_successful(data){
+	if(data.status == "success"){
+		alert(data.status);
+		window.location.href = web.dashboard;
+	} else {
+		alert(data.message);
+	}
+}
+
+
+
+function inviteuser_modal(id){
+	job_in_focus = id;
+	$('#invite_user_status_modal').modal('show');
+}
+
+function inviteuser(){
+	var user = {};
+	user.email = $('#inviteuser').val();
+	$.ajax({
+	  type: "POST",
+	  url: api.invite_user,
+	  contentType: "application/json",
+	  data: JSON.stringify({ "user_id": client_user_id, "auth_key": client_auth_key, "email_invited": user.email, "card_id": job_in_focus}),
+	  success: inviteuser_successful,
+	  dataType: "json"
+	});
+}
+
+function inviteuser_successful(data){
+	//
 	if(data.status == "success"){
 		alert(data.status);
 		window.location.href = web.dashboard;

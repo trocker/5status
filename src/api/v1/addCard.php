@@ -37,15 +37,19 @@ if($authObject->isAuthenticated()){
 	$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
 	$query = "INSERT INTO cards (card_title, owner_id, creation_date, modified_date, card_status) VALUES ('".$input['card_title']."', '".$input['user_id']."', '".time()."', '".time()."', 'TO-DO')";
 	$result = $dbconn->execute($query);
+	$present_card_id = $dbconn->last_id(); 
 
-	//TODO: Add the first comment, saying user added the card.
-	
-	//TODO: Add the user in card_sharers 
+	//Add the first comment, saying user added the card.
+	$dbconn->execute("INSERT INTO comments (comment, card_id, user_id, creation_date, type) VALUES ('created the card.', ".$present_card_id.", ".$input['user_id'].", ".time().", 'AUTO')");
+
+
+	//get this card's ID and add this user to card_sharers
+	$dbconn->execute("INSERT INTO card_sharers (card_id, user_id, priority, creation_date) VALUES ('".$present_card_id."', '".$input['user_id']."', 1, '".time()."')");
 	$dbconn->close();
 
 	$user_id = $input['user_id'];
 	$response['status'] = 'success';
-	$response['message'] = "Card added successfully for $user_id";	
+	$response['message'] = "Card added successfully for $user_id with card_id $present_card_id";	
 } else{
 	$response['status'] = 'failure';
 	$response['message'] = 'User could not be authenticated';

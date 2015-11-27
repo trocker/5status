@@ -33,6 +33,7 @@ if($authObject->isAuthenticated()){
   /**
    *  Continue assuming user is Authenticated 
    */
+
   $dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
   $query = "INSERT INTO comments (comment, card_id, user_id, creation_date) VALUES ('".$input['comment']."', ".$input['id'].", ".$input['user_id'].", ".time().")";
   $result = $dbconn->execute($query);

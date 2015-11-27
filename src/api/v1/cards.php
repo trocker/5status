@@ -29,14 +29,17 @@ if($authObject->isAuthenticated()){
 	/**
 	 * 	Continue assuming user is Authenticated 
 	 */
+
+	//TODO: Also show the cards in which the user is a card_sharer but not a creator and take the uniques of all of these selections
 	$dbconn = new DBConn($dbhost, $dbuser, $dbpassword, $dbname);
-	$query = "SELECT cards.*, accounts.name, accounts.picture FROM cards INNER JOIN accounts WHERE owner_id='".$input['user_id']."' AND accounts.user_id = cards.owner_id ORDER BY cards.creation_date DESC";
+	$query = "SELECT DISTINCT(cards.id),cards.*, accounts.name, accounts.picture FROM cards INNER JOIN accounts INNER JOIN card_sharers WHERE (owner_id='".$input['user_id']."' OR card_sharers.user_id='".$input['user_id']."') AND accounts.user_id = cards.owner_id ORDER BY cards.creation_date DESC";
 	//echo $query;
 	$result = $dbconn->execute($query);
 	if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
 
 			//get all the card sharers for this card
+			//TODO: Get the card sharers who have joined fully - don't have JOINED_COMMENT as not NONE
 			$result_cardsharers = $dbconn->execute("SELECT * FROM card_sharers INNER JOIN accounts WHERE card_id = '".$row['id']."' AND accounts.user_id = card_sharers.user_id");
 			$card_sharers = array();
 			while($row_cardsharer = $result_cardsharers->fetch_assoc()){

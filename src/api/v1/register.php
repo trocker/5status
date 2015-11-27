@@ -54,7 +54,11 @@ if($result->num_rows > 0){
 	/* 
 	* TODO: Change the status of the card_sharers table by the joined_comments. Also, edit and change the default user_id field which is NULL before the registraton.
 	*/
-
+	$result_card_shares = $dbconn->execute("SELECT * FROM card_sharers WHERE joined_comments='NOT_JOINED_".$input['email_id']."'");
+	while($row = $result_card_shares->fetch_assoc()){
+		//update
+		$dbconn->execute("UPDATE card_sharers SET user_id=".$incremented_user_id.", joined_comments='NONE' WHERE id=".$row['id']."");
+	}
 	//Form successful response
 	$response['status'] = "success";
 	$response['messages'] = "Email registered successfully. Don't forget your password! Not yet.";
